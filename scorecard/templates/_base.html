@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{% block head_title %}Municipal Money{% endblock %}</title>
+    <title>{% block head_title %}GIZ Projects{% endblock %}</title>
     <meta name="description" content="{% block head_meta_description %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block head_css %}
@@ -35,7 +35,7 @@
       <header id="page-header">
         <div id="page-header-title" class="container">
           <a id="menu-toggle" class="visible-xs fa fa-bars" href="#menu" data-toggle="collapse"></a>
-          <a class="title" href="{% url 'homepage' %}">Municipal Money <span class="visible-print-inline">- municipalmoney.gov.za</span></a>
+          <a class="title" href="{% url 'homepage' %}">GIZ Projects<span class="visible-print-inline">- http://giz.de</span></a>
 
           <div id="menu">
             <nav class="menu-nav">
@@ -62,33 +62,11 @@
       <footer id="page-footer">
         <section class="container footer-container">
           {% block footer_content %}
-            <div class="row">
-              <div class="col-sm-4">
-                <ul class="list-unstyled">
-                  <li><a href="/about">About Municipal Money</a></li>
-                  <li><a href="/locate">Find Your Municipality</a></li>
-                  <li><a href="/faq">Frequently Asked Questions</a></li>
-                  <li><a href="/terms">Terms of Use</a></li>
-                </ul>
-              </div>
-
-              <div class="col-sm-4">
-                <ul class="list-unstyled">
-                  <li>Use the <a href="https://municipaldata.treasury.gov.za/" target="_blank">Municipal Money API</a></li>
-                  <li>Contribute on <a href="https://github.com/Code4SA/municipal-data">GitHub</a> <i class="fa fa-github"></i></li>
-                  <li>Email us at <a href="mailto:feedback@municipalmoney.gov.za">feedback@municipalmoney.gov.za</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <h5>A project by <a href="http://www.treasury.gov.za/" target="_blank">National Treasury</a></h5>
 
             <div class="row">
               <div class="col-xs-6 col-sm-4">
-                <a href="http://www.treasury.gov.za/" target="_blank"><img class="logo" src="{% static 'images/treasury-logo.png' %}"></a>
-              </div>
-              <div class="col-xs-6 col-sm-4">
-                <a href="http://www.code4sa.org/" target="_blank"><img class="logo" src="{% static 'images/code4sa-logo.png' %}"></a>
+                <!-- TODO change openup logo -->
+                <a href="http://www.openup.org.za/" target="_blank"><img class="logo" src="{% static 'images/code4sa-logo.png' %}"></a>
               </div>
             </div>
           {% endblock footer_content %}
@@ -103,15 +81,7 @@
       {% block body_javascript %}
       <!-- Begin Google Analytics -->
       <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        {% if GOOGLE_ANALYTICS_ID %}
-        ga('create', '{{ GOOGLE_ANALYTICS_ID }}', 'auto');
-        {% endif %}
-        ga('send', 'pageview');
+      <!-- TODO ADD GOOGLE ANALYTICS -->
       </script>
       <!-- End Google Analytics -->
 
