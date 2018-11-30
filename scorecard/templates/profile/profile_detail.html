@@ -56,8 +56,6 @@
   </div>
 </div>
 
-{% include 'profile/_about.html' %}
-
 <nav class="page-nav-wrapper">
   <div class="page-nav-container">
     <div class="container">
@@ -65,75 +63,16 @@
         <div class="muni-name">{{ geography.name }}</div>
         <div class="muni-population">Population: {{ total_population|floatformat:"0" }}</div>
       </div>
-
-      <ul class="nav nav-pills" id="page-nav">
-        <li role="presentation" class="active"><a href="#performance"><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i><br><span class="nav-text">Financial<br>Performance</span></a></li>
-        <li role="presentation"><a href="#income"><i class="fa fa-money fa-2x" aria-hidden="true"></i><br><span class="nav-text">Income</span></a></li>
-        <li role="presentation"><a href="#spending"><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i><br><span class="nav-text">Spending</span></a></li>
-        <li role="presentation"><a href="#resources"><i class="fa fa-book fa-2x" aria-hidden="true"></i><br><span class="nav-text">Resources</span></a></li>
-        <li role="presentation" class="pull-right hidden-xs"><a href="/profiles/{{ geography.geo_level }}-{{ geography.geo_code }}-{{ geography.slug }}.pdf" target="_blank" rel="alternate" type="application/pdf"><i class="fa fa-print fa-2x" area-hidden="true"></i><br><span class="nav-text">Print PDF</span></a></li>
-        <li role="presentation" class="pull-right hidden-xs"><a href="#" class="twitter-share"><i class="fa fa-twitter fa-2x" area-hidden="true"></i><br><span class="nav-text">Tweet</span></a></li>
-        <li role="presentation" class="pull-right hidden-xs"><a href="#" class="fb-share"><i class="fa fa-facebook-square fa-2x" area-hidden="true"></i><br><span class="nav-text">Share</span></a></li>
-      </ul>
-
     </div>
 
-    {% include 'profile/_demarcation_notice.html' %}
   </div>
 </nav>
 {% endblock %}
 
 
 {% block content %}
-<div id="explainer-video">
-  <div class="video-preview video-preview-lg">
-    <a href="#video-modal" data-toggle="modal">
-      <div class="video-image" style="background-image: url('{% static 'img/video-placeholder.jpg' %}');">
-        <div class="video-image-inner">
-          <div class="play-button-wrapper">
-            <img src="{% static 'img/play-button-overlay.png' %}" class="play-button">
-          </div>
-          <div class="video-description">
-            A quick introduction to <strong>Municipal Finance</strong>
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
 
-  <!-- Video Modal -->
-  <div class="modal fade" id="video-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="btn close" href="#" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></a>
-          <h4 class="modal-title">A quick introduction to Municipal Finance</h4>
-        </div>
-        <div class="modal-body">{% include "_videos.html" %}</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Video Popup for explainer videos (one language only) -->
-  <div class="modal fade" id="video-popup" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe id="video-iframe" frameborder="0" allowfullscreen name="video-iframe" src=""></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-{% include 'profile/_performance.html' %}
-{% include 'profile/_income.html' %}
-{% include 'profile/_spending.html' %}
-{% include 'profile/_resources.html' %}
-
+{% include 'profile/_projects.html' %}
 {% endblock %}
 
 {% block body_javascript_extra %}
