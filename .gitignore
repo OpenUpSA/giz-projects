@@ -4,3 +4,7 @@ env
 staticfiles/
 docs/_build
 *.sqlite3
+\.*.sw[op]
+old
+.env
+
