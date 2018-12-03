@@ -29,6 +29,6 @@ class ProjectAdmin(ImportExportModelAdmin):
     resource_class = ProjectResource
     list_display = ['geo', 'programme', 'title', 'status']
     search_fields = ['title']
-    list_filter = ['status']
+    list_filter = ['status', 'programme']
 
 admin.site.register(Project, ProjectAdmin)
