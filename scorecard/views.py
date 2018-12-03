@@ -6,7 +6,7 @@ from wkhtmltopdf.views import PDFResponse
 from wkhtmltopdf.utils import wkhtmltopdf
 
 from scorecard.profiles import get_profile
-from scorecard.models import Geography, LocationNotFound
+from scorecard.models import Geography, LocationNotFound, Project
 
 
 class LocateView(TemplateView):
@@ -73,6 +73,8 @@ class GeographyDetailView(TemplateView):
         profile['geography'] = self.geo.as_dict()
         page_context['profile_data'] = profile
         page_context['geography'] = self.geo
+
+        page_context['projects'] = Project.objects.filter(geo=self.geo)
 
         profile['demarcation']['disestablished_to_geos'] = [
             Geography.objects.filter(geo_code=code).first().as_dict()

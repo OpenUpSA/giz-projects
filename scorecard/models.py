@@ -152,7 +152,7 @@ class Project(models.Model):
         ("Closing", 'Documentation & Closing'),
     )
 
-    geo_code = models.ForeignKey(Geography, on_delete=models.CASCADE)
+    geo = models.ForeignKey(Geography, on_delete=models.CASCADE)
     programme = models.CharField(max_length=20, null=False)
     title = models.CharField(max_length=255, null=False)
     status = models.CharField(choices=STATUS, null=False, max_length=255)
