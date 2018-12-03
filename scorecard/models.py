@@ -18,27 +18,6 @@ CATEGORIES = {
 class LocationNotFound(Exception):
     pass
 
-class Project(models.Model):
-    STATUS = (
-        ("Planned", 'Planned'),
-        ("Preparation", 'In preparation'),
-        ("Implementation", 'Implementation'),
-        ("Closing", 'Documentation & Closing'),
-    )
-
-    geo_level = models.CharField(max_length=15, null=False)
-    geo_code = models.CharField(max_length=10, null=False)
-    programme = models.CharField(max_length=20, null=False)
-    title = models.CharField(max_length=255, null=False)
-    status = models.CharField(choices=STATUS, null=False, max_length=255)
-    area_of_work = models.CharField(blank=True, max_length=255)
-    mode_of_delivery = models.CharField(blank=True, max_length=255)
-    partner = models.CharField(blank=True, max_length=255)
-    agenda = models.CharField(blank=True, max_length=255)
-    m_and_e = models.CharField(blank=True, max_length=255)
-    contact = models.CharField(blank=True, max_length=255)
-    email = models.CharField(blank=True, max_length=255)
-
 
 class Geography(models.Model):
     #: The level for this geography (eg. `country`) which, together with
@@ -135,7 +114,7 @@ class Geography(models.Model):
         }
 
     def __unicode__(self):
-        return self.full_name
+        return self.long_name
 
     @classmethod
     def find(cls, geo_code, geo_level):
@@ -164,3 +143,24 @@ class Geography(models.Model):
                 log.warn("Couldn't find geo that Mapit gave us: %s" % feature, exc_info=e)
 
         return geos
+
+class Project(models.Model):
+    STATUS = (
+        ("Planned", 'Planned'),
+        ("Preparation", 'In preparation'),
+        ("Implementation", 'Implementation'),
+        ("Closing", 'Documentation & Closing'),
+    )
+
+    geo_code = models.ForeignKey(Geography, on_delete=models.CASCADE)
+    programme = models.CharField(max_length=20, null=False)
+    title = models.CharField(max_length=255, null=False)
+    status = models.CharField(choices=STATUS, null=False, max_length=255)
+    area_of_work = models.CharField(blank=True, max_length=255)
+    mode_of_delivery = models.CharField(blank=True, max_length=255)
+    partner = models.CharField(blank=True, max_length=255)
+    agenda = models.CharField(blank=True, max_length=255)
+    m_and_e = models.CharField(blank=True, max_length=255)
+    contact = models.CharField(blank=True, max_length=255)
+    email = models.CharField(blank=True, max_length=255)
+
