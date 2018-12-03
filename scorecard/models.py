@@ -164,3 +164,6 @@ class Project(models.Model):
     contact = models.CharField(blank=True, max_length=255)
     email = models.CharField(blank=True, max_length=255)
 
+    def __unicode__(self):
+        return "%s (%s)" % (self.title, self.geo_code)
+
