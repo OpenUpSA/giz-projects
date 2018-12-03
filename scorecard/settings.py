@@ -40,6 +40,9 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = (
     'scorecard',
     'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.humanize',
     'django.contrib.messages',
@@ -47,6 +50,7 @@ INSTALLED_APPS = (
     'pipeline',
     'django_extensions',
     'corsheaders',
+
 )
 
 # Sites
@@ -66,6 +70,9 @@ MAPIT = {
 }
 
 MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'scorecard.middleware.RedirectsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -138,6 +145,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
                 "django.contrib.messages.context_processors.messages",
                 "scorecard.context_processors.google_analytics",
             ]
