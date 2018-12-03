@@ -1,7 +1,8 @@
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.core.urlresolvers import reverse
+from django.views.decorators.clickjacking import xframe_options_exempt
 from wkhtmltopdf.views import PDFResponse
 from wkhtmltopdf.utils import wkhtmltopdf
 
@@ -140,3 +141,21 @@ class SitemapView(TemplateView):
         return {
             'geos': Geography.objects.all(),
         }
+
+class MunicipalitiesView(TemplateView):
+    template_name = 'sitemap.txt'
+    content_type = 'text/plain'
+
+    @xframe_options_exempt
+    def get(self, request, *args, **kwargs):
+        munis = Geography.objects.filter(geo_level="municipality")
+
+        return JsonResponse([
+            {
+                "name" : muni.long_name,
+                "url" : "/profiles/%s-%s-%s/" % (muni.geo_level, muni.geo_code, muni.slug),
+                "geo_level" : muni.geo_level,
+                "id" : muni.slug,
+            }
+            for muni in munis
+        ], safe=False)
