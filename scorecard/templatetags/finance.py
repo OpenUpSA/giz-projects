@@ -31,6 +31,7 @@ def table_url(context, cube, year=None, month=None, muni=None, items=None, amoun
         if isinstance(v, list):
             params[k] = ",".join(v)
 
+    return ""
     return settings.API_BASE + "/table/" + cube + "/?" + urllib\
                    .parse\
                    .urlencode(params)

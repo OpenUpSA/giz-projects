@@ -34,7 +34,7 @@ make municipal finance information available to the public. It is made up of a c
 Note when doing a high request rate locally e.g. during updates, it seems that the above command doesn't release resources quickly enough so use the following for the API server instead
 
 ```bash
-export DJANGO_SETTINGS_MODULE=municipal_finance.settings
+export DJANGO_SETTINGS_MODULE=scorecard.settings
 export API_URL=http://localhost:8001/api  # only needed if using the table view against local API
 export PRELOAD_CUBES=true
 export SITE_ID=3
