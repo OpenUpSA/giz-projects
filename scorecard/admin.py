@@ -8,22 +8,23 @@ from import_export.fields import Field
 from .models import Project, Programme, Geography
 
 
-class ProgrammeForeignKeyWidget(ForeignKeyWidget):
-    def render(self, value, obj=None):
-        import pdb; pdb.set_trace()
+class CleanForeignKeyWidget(ForeignKeyWidget):
+    def clean(self, value, row, *args, **kwargs):
+        value = value.strip()
+        return super(CleanForeignKeyWidget, self).clean(value, row, *args, **kwargs)
 
 class ProjectResource(resources.ModelResource):
 
     programme = Field(
         column_name='programme',
         attribute='programme',
-        widget=ForeignKeyWidget(Programme, 'name')
+        widget=CleanForeignKeyWidget(Programme, 'name')
     )
 
     geo = Field(
         column_name='municipality',
         attribute='geo',
-        widget=ForeignKeyWidget(Geography, 'geo_code')
+        widget=CleanForeignKeyWidget(Geography, 'geo_code')
     )
 
     class Meta:
