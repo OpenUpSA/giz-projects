@@ -12,12 +12,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for project in projects %}
-                <tr>
-                    <td>{{ project.programme }}</td>
-                    <td>{{ project.title }}</td>
-                </tr>
-                {% endfor %}
+                {% if projects %}
+                    {% for project in projects %}
+                    <tr>
+                        <td>{{ project.programme }}</td>
+                        <td>{{ project.title }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
             </tbody>
         </table>
       <br>

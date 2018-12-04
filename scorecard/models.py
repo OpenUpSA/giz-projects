@@ -144,6 +144,12 @@ class Geography(models.Model):
 
         return geos
 
+class Programme(models.Model):
+    name = models.CharField(max_length=20, null=False)
+
+    def __unicode__(self):
+        return self.name
+
 class Project(models.Model):
     STATUS = (
         ("Planned", 'Planned'),
@@ -153,7 +159,7 @@ class Project(models.Model):
     )
 
     geo = models.ForeignKey(Geography, on_delete=models.CASCADE)
-    programme = models.CharField(max_length=20, null=False)
+    programme = models.ForeignKey(Programme, null=True)
     title = models.CharField(max_length=255, null=False)
     status = models.CharField(choices=STATUS, null=False, max_length=255)
     area_of_work = models.CharField(blank=True, max_length=255)

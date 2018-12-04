@@ -95,6 +95,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://giz:giz@localhost:5432
 
 db_config = dj_database_url.parse(DATABASE_URL)
 db_config['ATOMIC_REQUESTS'] = True
+db_config['AUTOCOMMIT'] = True
 DATABASES = {
     'default': db_config,
 }
