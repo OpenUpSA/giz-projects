@@ -1,31 +1,38 @@
 <div class="section" id="resources">
     <h1><i class="fa fa-book" aria-hidden="true"></i> Projects</h1>
 
-    <div class="row">
-        <div class="col-md-8">
-            {% if projects %}
-                {% for project in projects %}
-                    <div class="project-card">
-                        <div class="container">
-                            <h4>{{ project.title }}</h4>
+    <div class="card-deck">
+        {% if projects %}
+            {% for project in projects %}
+                <div class="project-card card">
+                <div class="card-header">{{ project.title }}</div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Status:</dt>
+                        <dd class="col-sm-9">{{ project.status }}</dd>
+                        <dt class="col-sm-3">Area of work:</dt>
+                        <dd class="col-sm-9">{{ project.area_of_work }}</dd>
+                        <dt class="col-sm-3">Mode of delivery:</dt>
+                        <dd class="col-sm-9">{{ project.mode_of_delivery }}</dd>
+                        <dt class="col-sm-3">Partner:</dt>
+                        <dd class="col-sm-9">{{ project.partner }}</dd>
+                        <dt class="col-sm-3">Agenda:</dt>
+                        <dd class="col-sm-9">{{ project.agenda }}</dd>
+                        <dt class="col-sm-3">M&amp;E:</dt>
+                        <dd class="col-sm-9">{{ project.m_and_e }}</dd>
+                        <dt class="col-sm-3">Contact person:</dt>
+                        <dd class="col-sm-9">{{ project.contact }}</dd>
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">{{ project.email }}</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">Programme: {{ project.programme }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>There are no projects registered for this municipality</div>
+        {% endif %}
 
-                            <p class="programme">{{ project.programme }}</h4>
-                            <p>Status: {{ project.status }}</p>
-                            <p>Area of work: {{ project.area_of_work }}</p>
-                            <p>Mode of delivery: {{ project.mode_of_delivery }}</p>
-                            <p>Partner: {{ project.partner }}</p>
-                            <p>Agenda: {{ project.agenda }}</p>
-                            <p>M &amp; E: {{ project.m_and_e }}</p>
-                            <p>Contact person: {{ project.contact }}</p>
-                            <p>Email: {{ project.email }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div>There are no projects registered for this municipality</div>
-            {% endif %}
-
-        </div>
     </div>
 </div>
 

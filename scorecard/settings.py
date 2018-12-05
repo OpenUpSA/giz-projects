@@ -217,6 +217,7 @@ PIPELINE = {
                 'bower_components/fontawesome/css/font-awesome.css',
                 'stylesheets/icomoon.css',
                 'stylesheets/scorecard.scss',
+                'stylesheets/bootstrap.min.css',
             ),
             'output_filename': 'scorecard.css'
         },
