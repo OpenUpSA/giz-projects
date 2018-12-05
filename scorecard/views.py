@@ -148,7 +148,7 @@ class MunicipalitiesView(TemplateView):
 
     @xframe_options_exempt
     def get(self, request, *args, **kwargs):
-        munis = Geography.objects.filter(geo_level="municipality")
+        munis = Geography.objects.all()
 
         return JsonResponse([
             {
