@@ -1,26 +1,31 @@
 <div class="section" id="resources">
-  <h1><i class="fa fa-book" aria-hidden="true"></i> Projects</h1>
+    <h1><i class="fa fa-book" aria-hidden="true"></i> Projects</h1>
 
-  <div class="row">
-    <div class="col-md-8">
-      {% for project in projects %}
-      <div class="project-card">
-          <div class="container">
-              <h4><b>{{ project.programme }}</b></h4>
-              <h4>{{ project.title }}</h4>
-              <p>Status: {{ project.status }}</p>
-              <p>Area of work: {{ project.area_of_work }}</p>
-              <p>Mode of delivery: {{ project.mode_of_delivery }}</p>
-              <p>Partner: {{ project.partner }}</p>
-              <p>Agenda: {{ project.agenda }}</p>
-              <p>M &amp; E: {{ project.m_and_e }}</p>
-              <p>Contact person: {{ project.contact }}</p>
-              <p>Email: {{ project.email }}</p>
-          </div>
-      </div>
-      {% endfor %}
+    <div class="row">
+        <div class="col-md-8">
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="container">
+                            <h4>{{ project.title }}</h4>
+
+                            <p class="programme">{{ project.programme }}</h4>
+                            <p>Status: {{ project.status }}</p>
+                            <p>Area of work: {{ project.area_of_work }}</p>
+                            <p>Mode of delivery: {{ project.mode_of_delivery }}</p>
+                            <p>Partner: {{ project.partner }}</p>
+                            <p>Agenda: {{ project.agenda }}</p>
+                            <p>M &amp; E: {{ project.m_and_e }}</p>
+                            <p>Contact person: {{ project.contact }}</p>
+                            <p>Email: {{ project.email }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div>There are no projects registered for this municipality</div>
+            {% endif %}
+
+        </div>
     </div>
-
-  </div>
 </div>
 
