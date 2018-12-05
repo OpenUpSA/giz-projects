@@ -101,16 +101,6 @@ class GeographyDetailView(TemplateView):
         return page_context
 
 
-class GeographyPDFView(GeographyDetailView):
-    def get(self, request, *args, **kwargs):
-        # render as pdf
-        url = '/profiles/%s-%s-%s?print=1' % (self.geo_level, self.geo_code, self.geo.slug)
-        url = request.build_absolute_uri(url)
-        pdf = wkhtmltopdf(url, zoom=0.7)
-        filename = '%s-%s-%s.pdf' % (self.geo_level, self.geo_code, self.geo.slug)
-
-        return PDFResponse(pdf, filename=filename)
-
 class SitemapView(TemplateView):
     template_name = 'sitemap.txt'
     content_type = 'text/plain'

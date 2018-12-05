@@ -1,10 +1,8 @@
 from django.conf.urls import url
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
-from django.views.generic.base import TemplateView
 
 from django.contrib import admin
-#from django.urls import path
 import scorecard.views as views
 
 # This cache is reset on each deployment. Corresponding caching headers are
@@ -25,12 +23,6 @@ urlpatterns = [
         name    = 'geography_detail',
     ),
     url(
-        regex   = '^profiles/(?P<geography_id>\w+-\w+)(-(?P<slug>[\w-]+))?\.pdf$',
-        view    = cache_page(CACHE_SECS)(views.GeographyPDFView.as_view()),
-        kwargs  = {},
-        name    = 'geography_pdf',
-    ),
-    url(
         regex   = '^locate/$',
         view    = cache_page(CACHE_SECS)(views.LocateView.as_view()),
         kwargs  = {},
@@ -42,15 +34,6 @@ urlpatterns = [
             "User-agent: *\nAllow: /\n" +
             "Sitemap: https://municipalmoney.gov.za/sitemap.txt",
             content_type="text/plain"
-        )
-    ),
-    url(
-        regex='^api(?:/.*)?$',
-        view=lambda r: HttpResponse(
-            "The API is at https://municipaldata.treasury.gov.za/api\n" +
-            "The API Documentation is at https://municipaldata.treasury.gov.za/docs\n",
-            content_type="text/plain",
-            status=404
         )
     ),
 ]
