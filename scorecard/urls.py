@@ -15,9 +15,6 @@ urlpatterns = [
     url('admin/', admin.site.urls),
 
     url(r'^$', views.HomepageView.as_view(), name='homepage'),
-    url(r'^about', TemplateView.as_view(template_name='about.html'), name='about'),
-    url(r'^faq', TemplateView.as_view(template_name='faq.html'), name='faq'),
-    url(r'^terms', TemplateView.as_view(template_name='terms.html'), name='terms'),
     url(r'^sitemap.txt', views.SitemapView.as_view(), name='sitemap'),
     url(r'^municipalities', views.MunicipalitiesView.as_view(), name='municipalities'),
     # e.g. /profiles/province-GT/
@@ -32,13 +29,6 @@ urlpatterns = [
         view    = cache_page(CACHE_SECS)(views.GeographyPDFView.as_view()),
         kwargs  = {},
         name    = 'geography_pdf',
-    ),
-    # e.g. /compare/province-GT/vs/province-WC/
-    url(
-        regex   = '^compare/(?P<geo_id1>\w+-\w+)/vs/(?P<geo_id2>\w+-\w+)/$',
-        view    = cache_page(CACHE_SECS)(views.GeographyCompareView.as_view()),
-        kwargs  = {},
-        name    = 'geography_compare',
     ),
     url(
         regex   = '^locate/$',

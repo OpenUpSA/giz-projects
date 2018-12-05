@@ -111,28 +111,6 @@ class GeographyPDFView(GeographyDetailView):
 
         return PDFResponse(pdf, filename=filename)
 
-
-class GeographyCompareView(TemplateView):
-    template_name = 'profile/head2head.html'
-
-    def get_context_data(self, geo_id1, geo_id2):
-        page_context = {
-            'geo_id1': geo_id1,
-            'geo_id2': geo_id2,
-        }
-
-        try:
-            level, code = geo_id1.split('-', 1)
-            page_context['geo1'] = Geography.find(code, level)
-
-            level, code = geo_id2.split('-', 1)
-            page_context['geo2'] = Geography.find(code, level)
-        except (ValueError, LocationNotFound):
-            raise Http404
-
-        return page_context
-
-
 class SitemapView(TemplateView):
     template_name = 'sitemap.txt'
     content_type = 'text/plain'
@@ -152,7 +130,6 @@ class HomepageView(TemplateView):
         }
 
 class MunicipalitiesView(TemplateView):
-    template_name = 'sitemap.txt'
     content_type = 'text/json'
 
     @xframe_options_exempt
