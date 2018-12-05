@@ -141,10 +141,19 @@ class SitemapView(TemplateView):
         return {
             'geos': Geography.objects.all(),
         }
+        
+class HomepageView(TemplateView):
+    template_name = 'homepage.html'
+    content_type = 'text/html'
+
+    def get_context_data(self):
+        return {
+            'projects': Project.objects.all(),
+        }
 
 class MunicipalitiesView(TemplateView):
     template_name = 'sitemap.txt'
-    content_type = 'text/plain'
+    content_type = 'text/json'
 
     @xframe_options_exempt
     def get(self, request, *args, **kwargs):
