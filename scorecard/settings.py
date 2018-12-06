@@ -263,3 +263,7 @@ LOGGING = {
         }
     }
 }
+
+FIXTURE_DIRS = (
+   'scorecard/fixtures/',
+)
