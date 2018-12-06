@@ -1,7 +1,4 @@
-# Municipal Money
-
-Municipal Money is a project between the [South African National Treasury](http://www.treasury.gov.za/) and [Code for South Africa](http://code4sa.org) to
-make municipal finance information available to the public. It is made up of a citizen-facing app and an API.
+# GIZ Projects
 
 # Local development
 
@@ -19,15 +16,20 @@ make municipal finance information available to the public. It is made up of a c
    After these packages have being installed the python packages can then be installed. ```pip install -r requiments.txt```
 5. Install postgresql and create a user and a database.
 
-   ``createuser municipal_finance -W``
+   ``createuser giz -W``
 
    * -W will prompt to create a password for the user.
 
-   ``createdb municipal_finance -O municipal_finance``
+   ``createdb giz -O giz``
 
    * -O will give ownership of the database to the municipal_finance user.
 
-6. install data from somewhere :)
+5. Run migrations
+    ``python manage.py migrate``
+
+6. Load data from fixtures
+    ``python manage.py loaddata scorecard/fixtures/initial_data.json``
+
 
 7. run it: ``python manage.py runserver``
 
