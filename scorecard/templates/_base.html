@@ -21,6 +21,9 @@
     {% endblock head_css %}
     {% block head_javascript %}
     <script src="//cdn.jsdelivr.net/g/modernizr@2.7,respond@1.4"></script>
+    <script src="{% static 'js/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'js/dist/d3.min.js' %}"></script>
+    <script src="{% static 'js/dist/underscore.js' %}"></script>
     {% block head_javascript_extra %}{% endblock %}{% endblock %}
 
     {% block head_facebook_tags %}{% endblock %}

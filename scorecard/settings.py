@@ -40,7 +40,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = (
     'import_export',
     'scorecard',
-    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -170,9 +169,35 @@ PYSCSS_LOAD_PATHS = [
     os.path.join(BASE_DIR, 'scorecard', 'static', 'bower_components'),
     os.path.join(BASE_DIR, 'census', 'static'),
 ]
-
 PIPELINE = {
+    'PIPELINE_ENABLED' : False,
     'STYLESHEETS': {
+        'docs': {
+            'source_filenames': (
+                'bower_components/fontawesome/css/font-awesome.css',
+                'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+                'slate/stylesheets/screen.css',
+                'stylesheets/docs.scss',
+            ),
+            'output_filename': 'docs.css',
+        },
+        'api-home': {
+            'source_filenames': (
+                'bower_components/fontawesome/css/font-awesome.css',
+                'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+                'stylesheets/site.scss',
+            ),
+            'output_filename': 'api-home.css',
+        },
+        'table': {
+            'source_filenames': (
+                'bower_components/fontawesome/css/font-awesome.css',
+                'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+                'stylesheets/vendor/select2.min.css',
+                'stylesheets/table.scss',
+            ),
+            'output_filename': 'table.css',
+        },
         'scorecard': {
             'source_filenames': (
                 'stylesheets/vendor/leaflet-0.6.4.css',
@@ -180,19 +205,59 @@ PIPELINE = {
                 'bower_components/fontawesome/css/font-awesome.css',
                 'stylesheets/icomoon.css',
                 'stylesheets/scorecard.scss',
-                'stylesheets/bootstrap.min.css',
             ),
             'output_filename': 'scorecard.css'
         },
     },
     'JAVASCRIPT': {
-        #'js': {
-        #    'source_filenames': (
-        #        'javascript/vendor/jquery-1.12.3.min.js',
-        #        'javascript/app.js',
-        #    ),
-        #    'output_filename': 'app.js',
-        #},
+        'js': {
+            'source_filenames': (
+                'javascript/vendor/jquery-1.12.3.min.js',
+                'javascript/app.js',
+            ),
+            'output_filename': 'app.js',
+        },
+        'docs': {
+            'source_filenames': (
+                'javascript/vendor/jquery-1.12.3.min.js',
+                'slate/javascripts/lib/_energize.js',
+                'slate/javascripts/lib/_lunr.js',
+                'slate/javascripts/lib/_jquery_ui.js',
+                'slate/javascripts/lib/_jquery.tocify.js',
+                'slate/javascripts/lib/_jquery.highlight.js',
+                'slate/javascripts/lib/_imagesloaded.min.js',
+                'slate/javascripts/app/_lang.js',
+                'slate/javascripts/app/_search.js',
+                'slate/javascripts/app/_toc.js',
+                'bower_components/underscore/underscore-min.js',
+                'bower_components/backbone/backbone-min.js',
+                'javascript/vendor/js.cookie.js',
+                'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+                'javascript/docs.js',
+            ),
+            'output_filename': 'docs.js',
+        },
+        'api-home': {
+            'source_filenames': (
+                'javascript/vendor/jquery-1.12.3.min.js',
+                'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+                'javascript/app.js',
+            ),
+            'output_filename': 'home.js',
+        },
+        'table': {
+            'source_filenames': (
+                'javascript/vendor/jquery-1.12.3.min.js',
+                'bower_components/underscore/underscore-min.js',
+                'bower_components/backbone/backbone-min.js',
+                'javascript/vendor/d3-format.min.js',
+                'javascript/vendor/select2.min.js',
+                'javascript/vendor/js.cookie.js',
+                'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+                'javascript/table.js',
+            ),
+            'output_filename': 'table.js',
+        },
         'scorecard': {
             'source_filenames': (
                 'bower_components/jquery/dist/jquery.min.js',
