@@ -54,17 +54,6 @@ INSTALLED_APPS = (
 
 )
 
-# Sites
-# 2: Scorecard
-# 3: API
-
-if DEBUG:
-    SITE_ID = int(os.environ.get('SITE_ID', '2'))
-
-API_BASE = "https://municipaldata.treasury.gov.za"
-API_URL = os.environ.get('API_URL', API_BASE + '/api')
-API_URL_INTERNAL = os.environ.get('API_URL_INTERNAL', API_URL)
-
 MAPIT = {
     'url': 'https://mapit.code4sa.org',
     'generation': '2',
@@ -184,32 +173,6 @@ PYSCSS_LOAD_PATHS = [
 
 PIPELINE = {
     'STYLESHEETS': {
-        #'docs': {
-        #    'source_filenames': (
-        #        'bower_components/fontawesome/css/font-awesome.css',
-        #        #'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-        #        'slate/stylesheets/screen.css',
-        #        'stylesheets/docs.scss',
-        #    ),
-        #    'output_filename': 'docs.css',
-        #},
-        #'api-home': {
-        #    'source_filenames': (
-        #        'bower_components/fontawesome/css/font-awesome.css',
-        #        #'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-        #        'stylesheets/site.scss',
-        #    ),
-        #    'output_filename': 'api-home.css',
-        #},
-        #'table': {
-        #    'source_filenames': (
-        #        'bower_components/fontawesome/css/font-awesome.css',
-        #        #'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-        #        'stylesheets/vendor/select2.min.css',
-        #        'stylesheets/table.scss',
-        #    ),
-        #    'output_filename': 'table.css',
-        #},
         'scorecard': {
             'source_filenames': (
                 'stylesheets/vendor/leaflet-0.6.4.css',
@@ -229,47 +192,6 @@ PIPELINE = {
         #        'javascript/app.js',
         #    ),
         #    'output_filename': 'app.js',
-        #},
-        #'docs': {
-        #    'source_filenames': (
-        #        'javascript/vendor/jquery-1.12.3.min.js',
-        #        'slate/javascripts/lib/_energize.js',
-        #        'slate/javascripts/lib/_lunr.js',
-        #        'slate/javascripts/lib/_jquery_ui.js',
-        #        'slate/javascripts/lib/_jquery.tocify.js',
-        #        'slate/javascripts/lib/_jquery.highlight.js',
-        #        'slate/javascripts/lib/_imagesloaded.min.js',
-        #        'slate/javascripts/app/_lang.js',
-        #        'slate/javascripts/app/_search.js',
-        #        'slate/javascripts/app/_toc.js',
-        #        'bower_components/underscore/underscore-min.js',
-        #        'bower_components/backbone/backbone-min.js',
-        #        'javascript/vendor/js.cookie.js',
-        #        'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        #        'javascript/docs.js',
-        #    ),
-        #    'output_filename': 'docs.js',
-        #},
-        #'api-home': {
-        #    'source_filenames': (
-        #        'javascript/vendor/jquery-1.12.3.min.js',
-        #        'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        #        'javascript/app.js',
-        #    ),
-        #    'output_filename': 'home.js',
-        #},
-        #'table': {
-        #    'source_filenames': (
-        #        'javascript/vendor/jquery-1.12.3.min.js',
-        #        'bower_components/underscore/underscore-min.js',
-        #        'bower_components/backbone/backbone-min.js',
-        #        'javascript/vendor/d3-format.min.js',
-        #        'javascript/vendor/select2.min.js',
-        #        'javascript/vendor/js.cookie.js',
-        #        'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        #        'javascript/table.js',
-        #    ),
-        #    'output_filename': 'table.js',
         #},
         'scorecard': {
             'source_filenames': (
