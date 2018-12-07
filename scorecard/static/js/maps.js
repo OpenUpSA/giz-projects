@@ -35,8 +35,7 @@ function MapItGeometryLoader() {
       url = url + '&simplify_tolerance=' + simplify;
     }
 
-    d3.json(this.mapit_url + url, function(error, geojson) {
-      if (error) return console.warn(error);
+    jQuery.get(this.mapit_url + url, function(geojson) {
       var features = _.values(geojson.features);
       _.each(features, self.decorateFeature);
       success({features: features});
@@ -49,8 +48,7 @@ function MapItGeometryLoader() {
     var url = "/area/MDB:" + geo_code + "/feature.geojson?generation=" + generation + "&simplify_tolerance=" + mapit_simplify +
       "&type=" + mapit_type;
 
-    d3.json(this.mapit_url + url, function(error, feature) {
-      if (error) return console.warn(error);
+    jQuery.get(this.mapit_url + url, function(feature) {
       self.decorateFeature(feature);
       success(feature);
     });
