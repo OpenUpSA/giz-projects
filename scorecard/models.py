@@ -116,6 +116,9 @@ class Geography(models.Model):
     def __unicode__(self):
         return self.long_name
 
+    def __str__(self):
+        return self.__unicode__()
+
     @classmethod
     def find(cls, geo_code, geo_level):
         geo = cls.objects.filter(geo_level=geo_level, geo_code=geo_code).first()
@@ -149,6 +152,9 @@ class Programme(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def __str__(self):
+        return self.__unicode__()
 
 class Project(models.Model):
     STATUS = (
