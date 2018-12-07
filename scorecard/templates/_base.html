@@ -10,6 +10,7 @@
     <title>{% block head_title %}GIZ Projects{% endblock %}</title>
     <meta name="description" content="{% block head_meta_description %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
     {% block head_css %}
     {% stylesheet "scorecard" %}
     <link href="{% static 'stylesheets/print.css' %}" rel="stylesheet" type="text/css" {% if not request.GET.print %}media="print"{% endif %} />
