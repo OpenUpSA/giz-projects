@@ -39,7 +39,7 @@ class TestGeography(TestCase):
 
     def testGeoID(self):
         self.assertEquals(self.g.geoid, "municipality-CPT")
-        self.assertEquals(self.g2.category_name, "district-ABC")
+        self.assertEquals(self.g2.geoid, "district-ABC")
 
     def testFind(self):
         geo_code = "CPT"
