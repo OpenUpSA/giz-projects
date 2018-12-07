@@ -5,11 +5,11 @@
 #
 # e.g.
 #
-# docker run --rm -t -i -v $PWD:$PWD jbothma/municipal-data:docker-dev-env bin/bash
-# root@079d0a9aae0d:/# cd /home/jdb/proj/code4sa/municipal_finance/django-app/
-# root@079d0a9aae0d:/home/jdb/proj/code4sa/municipal_finance/django-app# source /venv/bin/activate
-# root@079d0a9aae0d:/home/jdb/proj/code4sa/municipal_finance/django-app# export DATABASE_URL=postgres://municipal_finance@172.17.0.1/municipal_finance
-# root@079d0a9aae0d:/home/jdb/proj/code4sa/municipal_finance/django-app# python manage.py runserver 0.0.0.0:8000
+# docker run --rm -t -i -v $PWD:$PWD jbothma/giz-projects:docker-dev-env bin/bash
+# root@079d0a9aae0d:/# cd /home/jdb/proj/code4sa/giz-projects/django-app/
+# root@079d0a9aae0d:/home/jdb/proj/code4sa/giz-projects/django-app# source /venv/bin/activate
+# root@079d0a9aae0d:/home/jdb/proj/code4sa/giz-projects/django-app# export DATABASE_URL=postgres://giz@172.17.0.1/giz_projects
+# root@079d0a9aae0d:/home/jdb/proj/code4sa/giz-projects/django-app# python manage.py runserver 0.0.0.0:8000
 
 
 
