@@ -189,9 +189,7 @@ PIPELINE = {
         'scorecard': {
             'source_filenames': (
                 'js/dist/jquery.min.js',
-                'js/dist/d3.min.js',
                 'js/dist/underscore.js',
-                'js/vendor/d3-format.min.js',
                 'js/vendor/bootstrap-3.3.2/affix.js',
                 'js/vendor/bootstrap-3.3.2/scrollspy.js',
                 'js/vendor/bootstrap-3.3.2/transition.js',
@@ -201,7 +199,6 @@ PIPELINE = {
                 'js/vendor/spin.min.js',
                 'js/vendor/leaflet-0.6.4.js',
                 'js/vendor/leaflet.label.js',
-                'js/charts.js',
                 'js/place-finder.js',
                 'js/maps.js',
                 'js/scorecard.js',
