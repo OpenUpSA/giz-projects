@@ -37,6 +37,10 @@ class TestGeography(TestCase):
         self.assertEquals(self.g.category_name, "metro municipality")
         self.assertEquals(self.g2.category_name, "local municipality")
 
+    def testGeoID(self):
+        self.assertEquals(self.g.geoid, "municipality-CPT")
+        self.assertEquals(self.g2.category_name, "district-ABC")
+
     def testFind(self):
         geo_code = "CPT"
         geo_level = "municipality"
