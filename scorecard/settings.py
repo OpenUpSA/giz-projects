@@ -170,7 +170,6 @@ PYSCSS_LOAD_PATHS = [
     os.path.join(BASE_DIR, 'census', 'static'),
 ]
 PIPELINE = {
-    'PIPELINE_ENABLED' : False,
     'STYLESHEETS': {
         'scorecard': {
             'source_filenames': (

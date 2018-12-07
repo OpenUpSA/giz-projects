@@ -1,9 +1,12 @@
 from django.conf.urls import url
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
+from django.conf import settings
 
 from django.contrib import admin
 import scorecard.views as views
+from django.conf.urls.static import static
+
 
 # This cache is reset on each deployment. Corresponding caching headers are
 # sent to the client, too.
@@ -36,4 +39,4 @@ urlpatterns = [
             content_type="text/plain"
         )
     ),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
