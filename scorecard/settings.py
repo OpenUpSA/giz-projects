@@ -32,7 +32,7 @@ else:
 DATA_GOOGLE_ANALYTICS_ID = 'UA-48399585-37'
 SCORECARD_GOOGLE_ANALYTICS_ID = 'UA-48399585-40'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['giz_project.code4sa.org']
 
 
 # Application definition
