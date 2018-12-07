@@ -1,7 +1,6 @@
 import logging
 
 from django.db import models
-from django.conf import settings
 from django.utils.text import slugify
 import requests
 
@@ -14,10 +13,8 @@ CATEGORIES = {
     'C': 'district',
 }
 
-
 class LocationNotFound(Exception):
     pass
-
 
 class Geography(models.Model):
     #: The level for this geography (eg. `country`) which, together with
@@ -127,23 +124,16 @@ class Geography(models.Model):
         return geo
 
     @classmethod
-    def get_locations_from_coords(cls, longitude, latitude):
-        """
-        Returns a list of geographies containing this point.
-        """
-        url = settings.MAPIT['url'] + '/point/4326/%s,%s?generation=%s' % (longitude, latitude, settings.MAPIT['generation'])
-        resp = requests.get(url)
-        resp.raise_for_status()
-
+    def get_locations_from_coords(cls, revgeocoder, longitude, latitude):
         geos = []
-        for feature in resp.json().values():
+        for geo_code, geo_level in revgeocoder.lookup(longitude, latitude):
             try:
-                geo = cls.find(feature['codes']['MDB'], feature['type_name'].lower())
+                geo = cls.find(geo_code, geo_level.lower())
 
                 if geo.geo_level in ['municipality', 'district']:
                     geos.append(geo)
             except LocationNotFound as e:
-                log.warn("Couldn't find geo that Mapit gave us: %s" % feature, exc_info=e)
+                log.warn("Couldn't find geo that Mapit gave us: %s %s" % (geo_code, geo_level), exc_info=e)
 
         return geos
 
