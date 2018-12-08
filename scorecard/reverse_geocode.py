@@ -1,4 +1,5 @@
 from django.conf import settings
+import requests
 
 class ReverseGeocoder(object):
     def lookup(self, longitude, latitude):
