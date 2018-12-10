@@ -161,7 +161,7 @@ class Project(models.Model):
     area_of_work = models.CharField(blank=True, max_length=255, null=True)
     mode_of_delivery = models.CharField(blank=True, max_length=255, null=True)
     partner = models.CharField(blank=True, max_length=255, null=True)
-    agenda = models.CharField(blank=True, max_length=255, null=True)
+    supported_policies = models.CharField(blank=True, max_length=255, null=True)
     m_and_e = models.CharField(blank=True, max_length=255, null=True)
     contact = models.CharField(blank=True, max_length=255, null=True)
     email = models.CharField(blank=True, max_length=255, null=True)
