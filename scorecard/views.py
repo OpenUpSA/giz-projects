@@ -135,3 +135,21 @@ class MunicipalitiesView(TemplateView):
             }
             for muni in munis
         ], safe=False)
+
+class ProjectsView(TemplateView):
+    content_type = 'text/json'
+
+    @xframe_options_exempt
+    def get(self, request, *args, **kwargs):
+        projects = Project.objects.all()
+
+        return JsonResponse([
+            {
+                "geo_level" : project.geo.geo_level,
+                "geo_code" : project.geo.geo_code,
+                "title" : project.title,
+                "programme" : project.programme.name,
+                "status" : project.status,
+            }
+            for project in projects
+        ], safe=False)
