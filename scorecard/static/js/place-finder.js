@@ -11,7 +11,7 @@ var textMatchEngine = new Bloodhound({
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 300,
     prefetch: {
-        url: '/municipalities',
+        url: '/api/municipalities',
         cache: false,
     },
 });

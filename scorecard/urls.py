@@ -17,7 +17,7 @@ urlpatterns = [
 
     url(r'^$', views.HomepageView.as_view(), name='homepage'),
     url(r'^sitemap.txt', views.SitemapView.as_view(), name='sitemap'),
-    url(r'^municipalities', views.MunicipalitiesView.as_view(), name='municipalities'),
+    url(r'^api/municipalities', views.MunicipalitiesView.as_view(), name='municipalities'),
     url(r'^api/projects', views.ProjectsView.as_view(), name='projects_api'),
     # e.g. /profiles/province-GT/
     url(
