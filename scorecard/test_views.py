@@ -53,3 +53,8 @@ class TestProjectDownload(TestCase):
         self.assertTrue("application/vnd.ms-excel" in content_type[1])
         self.assertGreater(len(response.content), 0)
         
+class TestHomepage(TestCase):
+    def testLoad(self):
+        c = Client()
+        response = c.get("/")
+        self.assertEquals(response.status_code, 200)
