@@ -18,6 +18,18 @@ var MAPIT = {
   },
 };
 
+function ProjectLoader() {
+  var self = this;
+  self.url = '/api/projects';
+
+  this.loadProjects = function(success) {
+      return jQuery.get(this.url, function(js) {
+          var projects = js;
+          success(projects);
+      })
+  }
+}
+
 function MapItGeometryLoader() {
   var self = this;
   self.mapit_url = 'https://mapit.code4sa.org';
@@ -35,7 +47,7 @@ function MapItGeometryLoader() {
       url = url + '&simplify_tolerance=' + simplify;
     }
 
-    jQuery.get(this.mapit_url + url, function(geojson) {
+    return jQuery.get(this.mapit_url + url, function(geojson) {
       var features = _.values(geojson.features);
       _.each(features, self.decorateFeature);
       success({features: features});
@@ -48,7 +60,7 @@ function MapItGeometryLoader() {
     var url = "/area/MDB:" + geo_code + "/feature.geojson?generation=" + generation + "&simplify_tolerance=" + mapit_simplify +
       "&type=" + mapit_type;
 
-    jQuery.get(this.mapit_url + url, function(feature) {
+    return jQuery.get(this.mapit_url + url, function(feature) {
       self.decorateFeature(feature);
       success(feature);
     });
@@ -79,6 +91,15 @@ var Maps = function() {
     "fillOpacity": 0.3,
   };
 
+  this.projectStyle = {
+    "clickable": true,
+    "color": "red",
+    "fillColor": "red",
+    "weight": 1.0,
+    "opacity": 0.3,
+    "fillOpacity": 0.3,
+  };
+
   this.hoverStyle = {
     "fillColor": "#66c2a5",
     "fillOpacity": 0.7,
@@ -104,7 +125,10 @@ var Maps = function() {
       self.drawFocusFeature(feature);
     });
 
-    this.drawMunicipalities();
+    this.drawMunicipalities()
+      .done(function() {
+          self.addLegend();
+      });
   };
 
   this.drawMapForHomepage = function(centre, zoom) {
@@ -118,8 +142,23 @@ var Maps = function() {
       self.map.setView(centre, zoom);
     }
 
-    this.drawMunicipalities();
+    this.drawMunicipalities()
+      .done(function() {
+          self.addLegend();
+      });
   };
+
+  this.addLegend = function() {
+      var legend = L.control({position: 'bottomright'});
+
+      legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML += 'Municipalities with projects <i style="background:' + 'red' + '"></i>';
+        return div
+      }
+
+      legend.addTo(self.map);
+  }
 
   this.createMap = function() {
     var allowMapDrag = (browserWidth > 480) ? true : false;
@@ -154,14 +193,26 @@ var Maps = function() {
     var geo_code = this.geo ? this.geo.geo_code : null;
 
     // draw all local munis
-    GeometryLoader.loadGeometryForLevel('municipality', function(data) {
+    return GeometryLoader.loadGeometryForLevel('municipality', function(data) {
       // don't include this smaller geo, we already have a shape for that
       data.features = _.filter(data.features, function(f) {
         return f.properties.codes.MDB != geo_code;
-      });
+      })
+      self.data = data;
+    })
+    .done(function() {
+        var projectLoader = new ProjectLoader();
+        return projectLoader.loadProjects(function(projects) {
+            var munis = _.map(projects, function(el) {
+                return el.geo_code;
+            });
 
-      self.drawFeatures(data);
-    });
+            self.uniq_munis = _.uniq(munis, false);
+        })
+        .done(function() {
+           self.drawFeatures(self.data);
+        })
+    })
   };
 
   this.drawFocusFeature = function(feature) {
@@ -181,6 +232,9 @@ var Maps = function() {
       style: this.layerStyle,
       onEachFeature: function(feature, layer) {
         layer.bindLabel(feature.properties.name, {direction: 'auto'});
+        if (_.contains(self.uniq_munis, feature.properties.code)) {
+            layer.setStyle(self.projectStyle);
+        }
 
         layer.on('mouseover', function() {
           layer.setStyle(self.hoverStyle);
