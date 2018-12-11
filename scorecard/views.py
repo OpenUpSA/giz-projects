@@ -1,13 +1,15 @@
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
+from django.views import View
 from django.http import Http404, JsonResponse
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from wkhtmltopdf.views import PDFResponse
 from wkhtmltopdf.utils import wkhtmltopdf
 
 from scorecard.profiles import get_profile
-from scorecard.models import Geography, LocationNotFound, Project
+from scorecard.models import Geography, LocationNotFound, Project, ProjectResource
 
 
 class LocateView(TemplateView):
@@ -153,3 +155,10 @@ class ProjectsView(TemplateView):
             }
             for project in projects
         ], safe=False)
+
+class ProjectsDownloadView(View):
+
+    def get(self, request):
+        dataset = ProjectResource().export()
+        content_type = "application/vnd.ms-excel"
+        return HttpResponse(dataset.xls, content_type=content_type + "; charset=utf-8")

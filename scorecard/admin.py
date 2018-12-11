@@ -1,39 +1,12 @@
 from django.contrib import admin
 from django import forms
-from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import ForeignKeyWidget
-from import_export.fields import Field
 #from django_extensions.admin import ForeignKeyAutocompleteAdmin
 
-from .models import Project, Programme, Geography
+from .models import Project, Programme, Geography, ProjectResource, CleanForeignKeyWidget
 
-class CleanForeignKeyWidget(ForeignKeyWidget):
-    def clean(self, value, row, *args, **kwargs):
-        if hasattr(value, "strip"):
-            value = value.strip()
-        return super(CleanForeignKeyWidget, self).clean(value, row, *args, **kwargs)
 
-class ProjectResource(resources.ModelResource):
-    programme = Field(
-        column_name='programme',
-        attribute='programme',
-        widget=CleanForeignKeyWidget(Programme, 'name')
-    )
-
-    geo = Field(
-        column_name='municipality',
-        attribute='geo',
-        widget=CleanForeignKeyWidget(Geography, 'geo_code')
-    )
-
-    class Meta:
-        model = Project
-        export_order = (
-            'id', 'programme', 'geo', 'title', 'status', 
-            'area_of_work', 'mode_of_delivery', 'partner',
-            'agenda', 'm_and_e', 'contact', 'email'
-        )
 
 
 class GeoForm(forms.ModelForm):

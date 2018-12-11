@@ -35,3 +35,21 @@ class TestMunicipalitiesApi(TestApi):
         js = response.json()
         self.assertEquals(type(js), list)
         self.assertGreater(len(js), 0)
+
+class TestProjectDownload(TestCase):
+    fixtures = ['initial_data.json']
+
+    def testReverseUrl(self):
+        url = reverse("download_projects")
+        self.assertEquals(url, "/download-projects")
+
+    def testMimeType(self):
+        url = reverse("download_projects")
+        c = Client()
+        response = c.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue("content-type" in response._headers)
+        content_type = response._headers["content-type"]
+        self.assertTrue("application/vnd.ms-excel" in content_type[1])
+        self.assertGreater(len(response.content), 0)
+        

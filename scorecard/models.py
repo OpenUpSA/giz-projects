@@ -2,6 +2,9 @@ import logging
 
 from django.db import models
 from django.utils.text import slugify
+from import_export import resources
+from import_export.fields import Field
+from import_export.widgets import ForeignKeyWidget
 import requests
 
 log = logging.getLogger(__name__)
@@ -169,3 +172,29 @@ class Project(models.Model):
     def __unicode__(self):
         return "%s (%s)" % (self.title, self.geo)
 
+class CleanForeignKeyWidget(ForeignKeyWidget):
+    def clean(self, value, row, *args, **kwargs):
+        if hasattr(value, "strip"):
+            value = value.strip()
+        return super(CleanForeignKeyWidget, self).clean(value, row, *args, **kwargs)
+
+class ProjectResource(resources.ModelResource):
+    programme = Field(
+        column_name='programme',
+        attribute='programme',
+        widget=CleanForeignKeyWidget(Programme, 'name')
+    )
+
+    geo = Field(
+        column_name='municipality',
+        attribute='geo',
+        widget=CleanForeignKeyWidget(Geography, 'geo_code')
+    )
+
+    class Meta:
+        model = Project
+        export_order = (
+            'id', 'programme', 'geo', 'title', 'status', 
+            'area_of_work', 'mode_of_delivery', 'partner',
+            'supported_policies', 'm_and_e', 'contact', 'email'
+        )
