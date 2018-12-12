@@ -227,24 +227,30 @@ var Maps = function() {
   };
 
   this.drawFeatures = function(features) {
+    var setMuniStyle = function(layer, properties) {
+        if (_.contains(self.uniq_munis, properties.code)) {
+            layer.setStyle(self.projectStyle);
+        } else {
+            layer.setStyle(self.layerStyle)
+        }
+    }
     // draw all others
     return L.geoJson(features, {
       style: this.layerStyle,
       onEachFeature: function(feature, layer) {
-        layer.bindLabel(feature.properties.name, {direction: 'auto'});
-        if (_.contains(self.uniq_munis, feature.properties.code)) {
-            layer.setStyle(self.projectStyle);
-        }
+        setMuniStyle(layer, feature.properties);
 
-        layer.on('mouseover', function() {
-          layer.setStyle(self.hoverStyle);
-        });
-        layer.on('mouseout', function() {
-          layer.setStyle(self.layerStyle);
-        });
-        layer.on('click', function() {
-          window.location = '/profiles/' + feature.properties.level + '-' + feature.properties.code + '/';
-        });
+        layer
+          .bindLabel(feature.properties.name, {direction: 'auto'})
+          .on('mouseover', function() {
+            layer.setStyle(self.hoverStyle);
+          })
+          .on('mouseout', function() {
+            setMuniStyle(layer, feature.properties);
+          })
+          .on('click', function() {
+            window.location = '/profiles/' + feature.properties.level + '-' + feature.properties.code + '/';
+          });
       },
     }).addTo(this.map);
   };
