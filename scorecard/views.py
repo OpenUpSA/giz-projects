@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views import View
@@ -143,9 +144,9 @@ class ProjectsView(TemplateView):
 
     @xframe_options_exempt
     def get(self, request, *args, **kwargs):
-        projects = Project.objects.all()
+        projects = Project.objects.filter(geo__geo_level="municipality")
 
-        return JsonResponse([
+        muni_projects = [
             {
                 "geo_level" : project.geo.geo_level,
                 "geo_code" : project.geo.geo_code,
@@ -154,7 +155,28 @@ class ProjectsView(TemplateView):
                 "status" : project.status,
             }
             for project in projects
-        ], safe=False)
+        ]
+
+        projects = Project.objects.filter(geo__geo_level="district")
+
+        local_district = { local_muni : local_muni.parent_code for local_muni in Geography.objects.filter(geo_level="municipality") }
+        district_local = defaultdict(list)
+        for m, d in local_district.items():
+            district_local[d].append(m)
+
+        district_projects = []
+        for project in projects:
+            for muni in district_local[project.geo.geo_code]:
+                district_projects.append({
+                    "geo_level" : "municipality",
+                    "geo_code" : muni.geo_code,
+                    "title" : project.title,
+                    "programme" : project.programme.name,
+                    "status" : project.status
+                })
+        all_projects = muni_projects + district_projects
+
+        return JsonResponse(all_projects, safe=False)
 
 class ProjectsDownloadView(View):
 
