@@ -78,7 +78,9 @@ class GeographyDetailView(TemplateView):
         page_context['profile_data'] = profile
         page_context['geography'] = self.geo
 
-        page_context['projects'] = Project.objects.filter(geo=self.geo)
+        local_muni_projects = Project.objects.filter(geo=self.geo)
+        district_muni_projects = Project.objects.filter(geo__geo_code=self.geo.parent_code)
+        page_context['projects'] = local_muni_projects | district_muni_projects
 
         profile['demarcation']['disestablished_to_geos'] = [
             Geography.objects.filter(geo_code=code).first().as_dict()
