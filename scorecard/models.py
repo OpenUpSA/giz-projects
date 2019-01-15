@@ -52,6 +52,7 @@ class Geography(models.Model):
 
     class Meta:
         unique_together = ('geo_level', 'geo_code')
+        verbose_name_plural = "geographies"
 
     @property
     def category_name(self):

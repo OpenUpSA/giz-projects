@@ -24,10 +24,14 @@ class ProjectAdmin(ImportExportModelAdmin):
     autocomplete_fields = ['geo']
     form = GeoForm
 
-#ForeignKeyAutocompleteAdmin
-
 class ProgrammeAdmin(admin.ModelAdmin):
     pass
 
+class GeographyAdmin(admin.ModelAdmin):
+    list_display = ["geo_level", "geo_code", "name", "province_name", "category", "parent_code"]
+    search_fields = ["name"]
+    list_filter = ["geo_level", "province_name", "category", "miif_category"]
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Programme, ProgrammeAdmin)
+admin.site.register(Geography, GeographyAdmin)
