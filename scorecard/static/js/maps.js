@@ -105,20 +105,13 @@ var Maps = function() {
     "fillOpacity": 0.7,
   };
 
-  this.drawMapsForProfile = function(geo, demarcation) {
+  this.drawMapsForProfile = function(geo) {
     this.geo = geo;
     this.createMap();
     this.addImagery();
 
     // for 2011 munis, we load generation 1 maps, otherwise we load 2016 (generation 2) maps
     var generation = 2;
-    if (demarcation.disestablished) {
-      generation = 1;
-      this.featureGeoStyle.fillColor = "#fdcd58";
-      this.featureGeoStyle.fillOpacity = 0.7;
-      this.featureGeoStyle.color = "#fdcd58";
-      this.featureGeoStyle.opacity = 1.0;
-    }
 
     // draw this geometry
     GeometryLoader.loadGeometryForGeo(this.geo.geo_level, this.geo.geo_code, generation, function(feature) {

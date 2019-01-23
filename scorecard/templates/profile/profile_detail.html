@@ -81,7 +81,7 @@
 
   var profileData = {{ profile_data|jsonify|safe }}
   var maps = new Maps();
-  maps.drawMapsForProfile(profileData.geography, profileData.demarcation);
+  maps.drawMapsForProfile(profileData.geography);
 
 </script>
 

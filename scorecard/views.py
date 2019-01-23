@@ -82,27 +82,6 @@ class GeographyDetailView(TemplateView):
         district_muni_projects = Project.objects.filter(geo__geo_code=self.geo.parent_code)
         page_context['projects'] = local_muni_projects | district_muni_projects
 
-        profile['demarcation']['disestablished_to_geos'] = [
-            Geography.objects.filter(geo_code=code).first().as_dict()
-            for code in profile['demarcation'].get('disestablished_to', [])]
-
-        profile['demarcation']['established_from_geos'] = [
-            Geography.objects.filter(geo_code=code).first().as_dict()
-            for code in profile['demarcation'].get('established_from', [])]
-
-        for date in profile['demarcation']['land_gained']:
-            for change in date['changes']:
-                change['geo'] = Geography.objects.filter(
-                    geo_code=change['demarcation_code']).first().as_dict()
-        for date in profile['demarcation']['land_lost']:
-            for change in date['changes']:
-                change['geo'] = Geography.objects.filter(
-                    geo_code=change['demarcation_code']).first().as_dict()
-
-        # is this a head-to-head view?
-        if 'head2head' in self.request.GET:
-            page_context['head2head'] = 'head2head'
-
         return page_context
 
 
