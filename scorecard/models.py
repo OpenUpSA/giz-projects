@@ -168,7 +168,6 @@ class Project(models.Model):
     supported_policies = models.CharField(blank=True, max_length=255, null=True)
     m_and_e = models.CharField(blank=True, max_length=255, null=True)
     contact = models.CharField(blank=True, max_length=255, null=True)
-    email = models.CharField(blank=True, max_length=255, null=True)
 
     def __unicode__(self):
         return "%s (%s)" % (self.title, self.geo)
@@ -197,5 +196,5 @@ class ProjectResource(resources.ModelResource):
         export_order = (
             'id', 'programme', 'geo', 'title', 'status', 
             'area_of_work', 'mode_of_delivery', 'partner',
-            'supported_policies', 'm_and_e', 'contact', 'email'
+            'supported_policies', 'm_and_e', 'contact',
         )
