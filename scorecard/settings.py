@@ -64,8 +64,11 @@ MIDDLEWARE = [
     'scorecard.middleware.RedirectsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+CACHE_MIDDLEWARE_SECONDS = 0
 
 ROOT_URLCONF = 'scorecard.urls'
 
@@ -252,3 +255,4 @@ LOGGING = {
 FIXTURE_DIRS = (
    'scorecard/fixtures/',
 )
+
