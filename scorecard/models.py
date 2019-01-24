@@ -166,7 +166,7 @@ class Project(models.Model):
     mode_of_delivery = models.CharField(blank=True, max_length=255, null=True)
     partner = models.CharField(blank=True, max_length=255, null=True)
     supported_policies = models.CharField(blank=True, max_length=255, null=True)
-    m_and_e = models.CharField(blank=True, max_length=255, null=True)
+    m_and_e = models.CharField(blank=True, max_length=255, null=True, verbose_name="M & E")
     contact = models.CharField(blank=True, max_length=255, null=True)
 
     def __unicode__(self):
